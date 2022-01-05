@@ -1,0 +1,1 @@
+export { MovieRoute } from "./movie";
