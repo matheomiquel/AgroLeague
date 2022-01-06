@@ -12,10 +12,13 @@ export class MovieData {
       page: string;
     },
   ) {
-    const response = await this.http.get(
+    const movies = await this.http.get(
       `${process.env.URL}/?apikey=${process.env.API_KEY}${title}${year}${type}${page}`,
     );
-    return response.data;
+    if (typeof movies.data === "string") {
+      throw "error";
+    }
+    return movies.data;
   }
 
   async movieById(
@@ -23,9 +26,12 @@ export class MovieData {
       id: string;
     },
   ) {
-    const response = await this.http.get(
+    const movie = await this.http.get(
       `${process.env.URL}/?apikey=${process.env.API_KEY}${id}&plot=full`,
     );
-    return response.data;
+    if (typeof movie.data === "string") {
+      throw "error";
+    }
+    return movie.data;
   }
 }
